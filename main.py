@@ -66,10 +66,8 @@ def button(update, context):
 def command_start(update, context: CallbackContext):
     if update.effective_chat.type == "private":
         
-        addme = InlineKeyboardButton(text="🧚 Qrupa əlavə edin!", url="https://t.me/wordsazebot?startgroup=a")
-        sohbet = InlineKeyboardButton(text="💬 Söhbət Qrupumuz", url="https://t.me/grand_villa")
-        oyun = InlineKeyboardButton(text="👾 Oyun Qrupumuz", url="https://t.me/grand_villa")
-        admin = InlineKeyboardButton(text="👨🏻‍💻 Sahib", url="https://t.me/aykhan_s")
+        
+        admin = InlineKeyboardButton(text="👨🏻‍💻 Sahib", url="https://t.me/IIlIlllIIIIIIlIlllIII")
 
         keyboard = [[addme],[sohbet],[oyun],[admin]]
         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -87,7 +85,7 @@ def command_start(update, context: CallbackContext):
         game = get_or_create_game(chat_id)
         game.start()
 
-        update.message.reply_text('Söz Oyunu Başladı✨'.format(username), reply_to_message_id=True)
+        update.message.reply_text('Kelime Oyunu Başladı✨'.format(username), reply_to_message_id=True)
 
         set_master(update, context)
 
@@ -104,13 +102,13 @@ def set_master(update, context):
 
     game.set_master(update.message.from_user.id)
 
-    show_word_btn = InlineKeyboardButton("👻Sözə bax", callback_data='show_word')
-    change_word_btn = InlineKeyboardButton("♻️Sözü dəyiş", callback_data='change_word')
+    show_word_btn = InlineKeyboardButton("👻Kelimeyi Gör", callback_data='show_word')
+    change_word_btn = InlineKeyboardButton("♻️Kelimeyi Değiştir", callback_data='change_word')
 
     keyboard = [[show_word_btn], [change_word_btn]]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    update.message.reply_text('[{}](tg://user?id={}) sözü başa salır'.format(username,user_id), reply_to_message_id=True, reply_markup=reply_markup, parse_mode=ParseMode.MARKDOWN)
+    update.message.reply_text('[{}](tg://user?id={}) kelimeyi sunuyor'.format(username,user_id), reply_to_message_id=True, reply_markup=reply_markup, parse_mode=ParseMode.MARKDOWN)
 
 
 def command_master(update: Update, context):
@@ -123,7 +121,7 @@ def command_master(update: Update, context):
         return
 
     if not game.is_master_time_left():
-        update.message.reply_text('Aparıcı olmaq üçün {} saniyə qalıb'.format(game.get_master_time_left()),
+        update.message.reply_text('Lider olmak için {} saniyə kaldı'.format(game.get_master_time_left()),
                                   reply_to_message_id=True)
         return
 
@@ -205,7 +203,7 @@ def is_word_answered(update, context):
     word = game.get_current_word()
 
     if game.is_word_answered(user_id, text):
-        update.message.reply_text('*{}* sözünü [{}](tg://user?id={}) tapdı✅'.format(word, username,user_id), reply_to_message_id=True, parse_mode=ParseMode.MARKDOWN)
+        update.message.reply_text('*{}* kelimeyi [{}](tg://user?id={}) buldu✅'.format(word, username,user_id), reply_to_message_id=True, parse_mode=ParseMode.MARKDOWN)
 
         game.update_rating(user_id, username)
 
@@ -235,11 +233,11 @@ def main():
 
     dp.add_handler(CommandHandler("basla", command_start))
     dp.add_handler(CommandHandler("master", command_master))
-    dp.add_handler(CommandHandler("show_word", command_show_word))
-    dp.add_handler(CommandHandler("change_word", command_change_word))
-    dp.add_handler(CommandHandler("rating", command_rating))
-    dp.add_handler(CommandHandler("help", help))
-    dp.add_handler(CommandHandler("start", command_start))
+    dp.add_handler(CommandHandler("Kelimeyi Göster", command_show_word))
+    dp.add_handler(CommandHandler("Kelimeyi Değiştir", command_change_word))
+    dp.add_handler(CommandHandler("Değerlendirme", command_rating))
+    dp.add_handler(CommandHandler("Yardım", help))
+    dp.add_handler(CommandHandler("Başla", command_start))
 
     dp.add_handler(CallbackQueryHandler(button))
 
