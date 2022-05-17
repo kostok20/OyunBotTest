@@ -37,10 +37,10 @@ def setup_logger():
 
 
 def help(update, context):
-    update.message.reply_text('Mövcud əmrlər:\n' +
-                              '/basla - Yeni oyun başladmaq\n' +
-                              '/master - Aparıcı olmaq\n' +
-                              '/rating - Qrup üzrə reytinq', reply_to_message_id=True)
+    update.message.reply_text('Kodlar:\n' +
+                              '/basla - Yeni oyun başlatmak\n' +
+                              '/master - Lider Olmak\n' +
+                              '/rating - Gruptaki Raiting', reply_to_message_id=True)
 
 
 def button(update, context):
@@ -67,11 +67,11 @@ def command_start(update, context: CallbackContext):
     if update.effective_chat.type == "private":
         
         
-        admin = InlineKeyboardButton(text="👨🏻‍💻 Sahib", url="https://t.me/IIlIlllIIIIIIlIlllIII")
+        admin = InlineKeyboardButton(text="👨🏻‍💻 Sahib", url="https://t.me/kostok20")
 
         keyboard = [[addme],[sohbet],[oyun],[admin]]
         reply_markup = InlineKeyboardMarkup(keyboard)
-        update.message.reply_text('🇦🇿Şəxsidə oyun olmaz!', reply_to_message_id=True, reply_markup=reply_markup)
+        update.message.reply_text('🇹🇷Pm de oyun mu olur 😆!', reply_to_message_id=True, reply_markup=reply_markup)
     else:
         chat_id = update.message.chat.id
         user_id = update.message.from_user.id
